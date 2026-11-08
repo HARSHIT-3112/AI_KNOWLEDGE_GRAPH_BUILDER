@@ -1,0 +1,21 @@
+{
+  "document": "AI_Knowledge_Graph_Builder_Complete_Learning_Guide.pdf",
+  "note": "Questions are deliberately paraphrased (avoid the guide's own wording). relevant_pages = pages that answer the question. Add your own!",
+  "questions": [
+    {"q": "How do I stop the same file from creating duplicate nodes when it is processed again?", "relevant_pages": [3, 14, 22, 23]},
+    {"q": "How long should each text piece be, and how much should neighbouring pieces share?", "relevant_pages": [9]},
+    {"q": "My code runs inside a container and cannot reach the database on localhost. What address should it use?", "relevant_pages": [20, 23]},
+    {"q": "What is the difference between always inserting and insert-only-if-missing in the query language?", "relevant_pages": [6]},
+    {"q": "How can I show where a stored fact originally came from?", "relevant_pages": [3, 14]},
+    {"q": "What travels between the steps of a stateful agent workflow?", "relevant_pages": [18]},
+    {"q": "Which numbers tell me whether the retriever puts useful passages near the top?", "relevant_pages": [19]},
+    {"q": "What should the system say when it cannot find supporting passages for a question?", "relevant_pages": [15, 22]},
+    {"q": "Why is it unsafe to execute database commands that the model wrote?", "relevant_pages": [2, 19, 20, 22]},
+    {"q": "A document contains text telling the AI to ignore its rules. How should we treat that?", "relevant_pages": [19, 20]},
+    {"q": "Where should passwords and secret keys be kept?", "relevant_pages": [8, 19]},
+    {"q": "What happens with a scanned PDF that has no selectable text?", "relevant_pages": [9]},
+    {"q": "Which low-code tool should send a Slack message when processing finishes?", "relevant_pages": [16, 17]},
+    {"q": "Does the very first ingestion pipeline need to be an autonomous agent?", "relevant_pages": [18]},
+    {"q": "Suggest a small set of example data to test the first version with.", "relevant_pages": [24]}
+  ]
+}

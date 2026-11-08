@@ -1,0 +1,82 @@
+# M10 — the whole system: Neo4j + API + worker. Ollama runs on the Mac itself (it needs the GPU).
+#
+#   docker compose up -d --build        # start everything
+#   docker compose ps                   # health of each service
+#   docker compose logs -f worker       # JSON logs (pipe to `jq` to filter)
+#
+# Neo4j Browser: http://localhost:7475  (bolt://localhost:7688)   API: http://localhost:8000/docs
+#
+# Hardening choices (guide §12.4, §13):
+#   * pinned image versions (tag + digest), no `latest`
+#   * ports bound to 127.0.0.1 only — nothing reachable from other machines on your network
+#   * memory limits sized for an 8 GB laptop
+#   * health checks + start order: api/worker wait until Neo4j is actually healthy
+#   * inside the network, services use names (bolt://neo4j:7687), not localhost (guide §13.2)
+
+x-app: &app
+  build: .
+  image: kg-builder:1.0.0
+  env_file: .env
+  environment:
+    NEO4J_URI: bolt://neo4j:7687                     # service name, not localhost
+    OLLAMA_URL: http://host.docker.internal:11434    # Ollama on the Mac host
+  volumes:
+    - ./documents/uploads:/app/documents/uploads     # shared by api (writes) and worker (reads)
+    - ./extractions:/app/extractions
+  depends_on:
+    neo4j:
+      condition: service_healthy
+  restart: unless-stopped
+
+services:
+  neo4j:
+    image: neo4j:2026.10.1@sha256:7dbd307cc8f35d6a061cf71659d3d8f783c3db9e8c2f5bb9d54f77921931952a
+    container_name: kg-learning-neo4j
+    ports:
+      - "127.0.0.1:7475:7474"   # Browser UI
+      - "127.0.0.1:7688:7687"   # Bolt for local scripts/tests
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 512m
+      NEO4J_server_memory_pagecache_size: 256m
+    volumes:
+      - kg_neo4j_data:/data
+    mem_limit: 1200m
+    stop_grace_period: 2m       # let Neo4j shut down cleanly (10 s default = force-kill = recovery needed)
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p \"$${NEO4J_AUTH#neo4j/}\" 'RETURN 1' >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  api:
+    <<: *app
+    container_name: kg-api
+    ports:
+      - "127.0.0.1:8000:8000"
+    mem_limit: 512m
+    healthcheck:
+      # liveness, not readiness: a Neo4j outage must not make Docker restart the API in a loop
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  worker:
+    <<: *app
+    container_name: kg-worker
+    command: ["python", "-m", "scripts.worker"]
+    mem_limit: 512m
+    healthcheck:
+      # the worker touches this file every loop; one LLM call can take minutes, so allow 15 min
+      test: ["CMD", "python", "-c", "import os,time,sys; sys.exit(time.time()-os.path.getmtime('/tmp/kg-worker-heartbeat') > 900)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  kg_neo4j_data:

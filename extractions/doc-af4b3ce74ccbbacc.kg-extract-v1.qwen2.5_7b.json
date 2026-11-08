@@ -1,0 +1,150 @@
+{
+  "document_id": "doc-af4b3ce74ccbbacc",
+  "model": "qwen2.5:7b",
+  "prompt_version": "kg-extract-v1",
+  "schema_version": "extraction-v1",
+  "max_chars": 600,
+  "overlap": 100,
+  "source_path": "documents/uploads/doc-af4b3ce74ccbbacc.txt",
+  "created_at": "2026-11-08T17:08:32.143269+00:00",
+  "chunks": [
+    {
+      "chunk_id": "chunk-eb2532ea0662ff6b",
+      "chunk_index": 0,
+      "page": 1,
+      "status": "ok",
+      "attempts": 1,
+      "raw": "{\n  \"entities\": [\n    {\n      \"name\": \"Orbitly\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Asha\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"RouteWise\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"RouteWise\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"Python\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"PostgreSQL\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"Vikram\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Platform Team\",\n      \"type\": \"Team\"\n    },\n    {\n      \"name\": \"TechNova\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Priya\",\n      \"type\": \"Person\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"source\": \"Asha\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"Orbitly\",\n      \"evidence\": \"Asha works at Orbitly as a Product Manager\",\n      \"properties\": {\n        \"role\": \"Product Manager\",\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Asha\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"RouteWise\",\n      \"evidence\": \"works on RouteWise, a route-planning project owned by Orbitly\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Orbitly\",\n      \"type\": \"USES\",\n      \"target\": \"Python\",\n      \"evidence\": \"RouteWise uses Python and PostgreSQL\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Orbitly\",\n      \"type\": \"USES\",\n      \"target\": \"PostgreSQL\",\n      \"evidence\": \"RouteWise uses Python and PostgreSQL\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Vikram\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"Orbitly\",\n      \"evidence\": \"Vikram works at Orbitly as a Data Engineer\",\n      \"properties\": {\n        \"role\": \"Data Engineer\",\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Vikram\",\n      \"type\": \"MEMBER_OF\",\n      \"target\": \"Platform Team\",\n      \"evidence\": \"Vikram works at Orbitly as a Data Engineer and is a member of the Platform Team\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Vikram\",\n      \"type\": \"COLLABORATES_WITH\",\n      \"target\": \"Priya\",\n      \"evidence\": \"Vikram collaborates with Priya from TechNova on a shared mapping dataset\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    }\n  ]\n}",
+      "entities": [
+        {
+          "name": "Orbitly",
+          "type": "Company"
+        },
+        {
+          "name": "Asha",
+          "type": "Person"
+        },
+        {
+          "name": "Python",
+          "type": "Technology"
+        },
+        {
+          "name": "PostgreSQL",
+          "type": "Technology"
+        },
+        {
+          "name": "Vikram",
+          "type": "Person"
+        },
+        {
+          "name": "Platform Team",
+          "type": "Team"
+        },
+        {
+          "name": "TechNova",
+          "type": "Company"
+        },
+        {
+          "name": "Priya",
+          "type": "Person"
+        }
+      ],
+      "relationships": [
+        {
+          "source": "Asha",
+          "source_type": "Person",
+          "type": "WORKS_AT",
+          "target": "Orbitly",
+          "target_type": "Company",
+          "properties": {
+            "role": "Product Manager"
+          },
+          "evidence": "Asha works at Orbitly as a Product Manager",
+          "chunk_id": "chunk-eb2532ea0662ff6b"
+        },
+        {
+          "source": "Vikram",
+          "source_type": "Person",
+          "type": "WORKS_AT",
+          "target": "Orbitly",
+          "target_type": "Company",
+          "properties": {
+            "role": "Data Engineer"
+          },
+          "evidence": "Vikram works at Orbitly as a Data Engineer",
+          "chunk_id": "chunk-eb2532ea0662ff6b"
+        },
+        {
+          "source": "Vikram",
+          "source_type": "Person",
+          "type": "MEMBER_OF",
+          "target": "Platform Team",
+          "target_type": "Team",
+          "properties": {},
+          "evidence": "Vikram works at Orbitly as a Data Engineer and is a member of the Platform Team",
+          "chunk_id": "chunk-eb2532ea0662ff6b"
+        },
+        {
+          "source": "Vikram",
+          "source_type": "Person",
+          "type": "COLLABORATES_WITH",
+          "target": "Priya",
+          "target_type": "Person",
+          "properties": {},
+          "evidence": "Vikram collaborates with Priya from TechNova on a shared mapping dataset",
+          "chunk_id": "chunk-eb2532ea0662ff6b"
+        }
+      ],
+      "rejected": [
+        {
+          "item": {
+            "name": "RouteWise",
+            "type": "Project"
+          },
+          "reason": "ambiguous: given types ['Project', 'Technology']"
+        },
+        {
+          "item": {
+            "source": "Asha",
+            "type": "WORKS_ON",
+            "target": "RouteWise",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "works on RouteWise, a route-planning project owned by Orbitly"
+          },
+          "reason": "endpoint 'RouteWise' is not an accepted entity"
+        }
+      ],
+      "needs_review": [
+        {
+          "item": {
+            "source": "Orbitly",
+            "type": "USES",
+            "target": "Python",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "RouteWise uses Python and PostgreSQL"
+          },
+          "reason": "evidence does not mention ['Orbitly']"
+        },
+        {
+          "item": {
+            "source": "Orbitly",
+            "type": "USES",
+            "target": "PostgreSQL",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "RouteWise uses Python and PostgreSQL"
+          },
+          "reason": "evidence does not mention ['Orbitly']"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "document_id": "doc-2ac60d934862fc91",
+  "model": "qwen2.5:7b",
+  "prompt_version": "kg-extract-v1",
+  "schema_version": "extraction-v1",
+  "max_chars": 600,
+  "overlap": 100,
+  "source_path": "documents/uploads/doc-2ac60d934862fc91.txt",
+  "created_at": "2026-11-08T17:23:16.897011+00:00",
+  "chunks": [
+    {
+      "chunk_id": "chunk-f9384d277d0160e4",
+      "chunk_index": 0,
+      "page": 1,
+      "status": "ok",
+      "attempts": 1,
+      "raw": "{\n  \"entities\": [\n    {\n      \"name\": \"Meera\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Atlas\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"DataForge\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Rust\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"Neo4j\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"Asha\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Orbitly\",\n      \"type\": \"Company\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"source\": \"Meera\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"Atlas\",\n      \"evidence\": \"Meera works on Atlas, a mapping project owned by DataForge.\",\n      \"properties\": {\n        \"role\": null\n      }\n    },\n    {\n      \"source\": \"Atlas\",\n      \"type\": \"USES\",\n      \"target\": \"Rust\",\n      \"evidence\": \"Atlas uses Rust and Neo4j.\",\n      \"properties\": {\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Atlas\",\n      \"type\": \"USES\",\n      \"target\": \"Neo4j\",\n      \"evidence\": \"Atlas uses Rust and Neo4j.\",\n      \"properties\": {\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Asha\",\n      \"type\": \"COLLABORATES_WITH\",\n      \"target\": \"Meera\",\n      \"evidence\": \"Asha from Orbitly collaborates with Meera on the Atlas data model.\",\n      \"properties\": {\n        \"since\": null\n      }\n    }\n  ]\n}",
+      "entities": [
+        {
+          "name": "Meera",
+          "type": "Person"
+        },
+        {
+          "name": "Atlas",
+          "type": "Project"
+        },
+        {
+          "name": "DataForge",
+          "type": "Company"
+        },
+        {
+          "name": "Rust",
+          "type": "Technology"
+        },
+        {
+          "name": "Neo4j",
+          "type": "Technology"
+        },
+        {
+          "name": "Asha",
+          "type": "Person"
+        },
+        {
+          "name": "Orbitly",
+          "type": "Company"
+        }
+      ],
+      "relationships": [
+        {
+          "source": "Meera",
+          "source_type": "Person",
+          "type": "WORKS_ON",
+          "target": "Atlas",
+          "target_type": "Project",
+          "properties": {},
+          "evidence": "Meera works on Atlas, a mapping project owned by DataForge.",
+          "chunk_id": "chunk-f9384d277d0160e4"
+        },
+        {
+          "source": "Atlas",
+          "source_type": "Project",
+          "type": "USES",
+          "target": "Rust",
+          "target_type": "Technology",
+          "properties": {},
+          "evidence": "Atlas uses Rust and Neo4j.",
+          "chunk_id": "chunk-f9384d277d0160e4"
+        },
+        {
+          "source": "Atlas",
+          "source_type": "Project",
+          "type": "USES",
+          "target": "Neo4j",
+          "target_type": "Technology",
+          "properties": {},
+          "evidence": "Atlas uses Rust and Neo4j.",
+          "chunk_id": "chunk-f9384d277d0160e4"
+        },
+        {
+          "source": "Asha",
+          "source_type": "Person",
+          "type": "COLLABORATES_WITH",
+          "target": "Meera",
+          "target_type": "Person",
+          "properties": {},
+          "evidence": "Asha from Orbitly collaborates with Meera on the Atlas data model.",
+          "chunk_id": "chunk-f9384d277d0160e4"
+        }
+      ],
+      "rejected": [],
+      "needs_review": []
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+{
+  "document_id": "doc-7669e6ee4c604cc1",
+  "model": "qwen2.5:7b",
+  "prompt_version": "kg-extract-v1",
+  "schema_version": "extraction-v1",
+  "created_at": "2026-11-08T16:31:08.379764+00:00",
+  "totals": {
+    "accepted_relationships": 14,
+    "rejected": 5,
+    "failed_chunks": 0
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-6d7f60a0877d7c16",
+      "chunk_index": 0,
+      "page": 1,
+      "status": "ok",
+      "attempts": 1,
+      "tokens": [
+        455,
+        719
+      ],
+      "raw": "{\n  \"entities\": [\n    {\n      \"name\": \"TechNova\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Harshit\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Priya\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Ravi\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Vision Team\",\n      \"type\": \"Team\"\n    },\n    {\n      \"name\": \"VisionAI\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"DataForge\",\n      \"type\": \"Company\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"source\": \"Harshit\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"TechNova\",\n      \"evidence\": \"Harshit works at TechNova as an ML Engineer\",\n      \"properties\": {\n        \"role\": \"ML Engineer\",\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Harshit\",\n      \"type\": \"MEMBER_OF\",\n      \"target\": \"Vision Team\",\n      \"evidence\": \"Harshit works at TechNova as an ML Engineer and is a member of the Vision Team\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Priya\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"TechNova\",\n      \"evidence\": \"Priya also works at TechNova as a Data Scientist\",\n      \"properties\": {\n        \"role\": \"Data Scientist\",\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Priya\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"VisionAI\",\n      \"evidence\": \"Priya also works at TechNova as a Data Scientist, and she works on VisionAI together with Harshit\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Harshit\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"VisionAI\",\n      \"evidence\": \"Priya also works at TechNova as a Data Scientist, and she works on VisionAI together with Harshit\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"TechNova\",\n      \"type\": \"OWNS\",\n      \"target\": \"VisionAI\",\n      \"evidence\": \"VisionAI is a computer vision platform owned by TechNova\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Harshit\",\n      \"type\": \"COLLABORATES_WITH\",\n      \"target\": \"Ravi\",\n      \"evidence\": \"Harshit collaborates with Ravi from DataForge on dataset quality tooling\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"DataForge\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"TechNova\",\n      \"evidence\": \"Harshit collaborates with Ravi from DataForge on dataset quality tooling\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    }\n  ]\n}",
+      "entities": [
+        {
+          "name": "TechNova",
+          "type": "Company"
+        },
+        {
+          "name": "Harshit",
+          "type": "Person"
+        },
+        {
+          "name": "Priya",
+          "type": "Person"
+        },
+        {
+          "name": "Ravi",
+          "type": "Person"
+        },
+        {
+          "name": "Vision Team",
+          "type": "Team"
+        },
+        {
+          "name": "VisionAI",
+          "type": "Project"
+        },
+        {
+          "name": "DataForge",
+          "type": "Company"
+        }
+      ],
+      "relationships": [
+        {
+          "source": "Harshit",
+          "source_type": "Person",
+          "type": "WORKS_AT",
+          "target": "TechNova",
+          "target_type": "Company",
+          "properties": {
+            "role": "ML Engineer"
+          },
+          "evidence": "Harshit works at TechNova as an ML Engineer",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "Harshit",
+          "source_type": "Person",
+          "type": "MEMBER_OF",
+          "target": "Vision Team",
+          "target_type": "Team",
+          "properties": {},
+          "evidence": "Harshit works at TechNova as an ML Engineer and is a member of the Vision Team",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "Priya",
+          "source_type": "Person",
+          "type": "WORKS_AT",
+          "target": "TechNova",
+          "target_type": "Company",
+          "properties": {
+            "role": "Data Scientist"
+          },
+          "evidence": "Priya also works at TechNova as a Data Scientist",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "Priya",
+          "source_type": "Person",
+          "type": "WORKS_ON",
+          "target": "VisionAI",
+          "target_type": "Project",
+          "properties": {},
+          "evidence": "Priya also works at TechNova as a Data Scientist, and she works on VisionAI together with Harshit",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "Harshit",
+          "source_type": "Person",
+          "type": "WORKS_ON",
+          "target": "VisionAI",
+          "target_type": "Project",
+          "properties": {},
+          "evidence": "Priya also works at TechNova as a Data Scientist, and she works on VisionAI together with Harshit",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "TechNova",
+          "source_type": "Company",
+          "type": "OWNS",
+          "target": "VisionAI",
+          "target_type": "Project",
+          "properties": {},
+          "evidence": "VisionAI is a computer vision platform owned by TechNova",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        },
+        {
+          "source": "Harshit",
+          "source_type": "Person",
+          "type": "COLLABORATES_WITH",
+          "target": "Ravi",
+          "target_type": "Person",
+          "properties": {},
+          "evidence": "Harshit collaborates with Ravi from DataForge on dataset quality tooling",
+          "chunk_id": "chunk-6d7f60a0877d7c16"
+        }
+      ],
+      "rejected": [
+        {
+          "item": {
+            "source": "DataForge",
+            "type": "WORKS_AT",
+            "target": "TechNova",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "Harshit collaborates with Ravi from DataForge on dataset quality tooling"
+          },
+          "reason": "ontology: Company-[:WORKS_AT]->Company is not allowed by the ontology"
+        }
+      ]
+    },
+    {
+      "chunk_id": "chunk-132e1b1c4b87454f",
+      "chunk_index": 1,
+      "page": 1,
+      "status": "ok",
+      "attempts": 1,
+      "tokens": [
+        464,
+        697
+      ],
+      "raw": "{\n  \"entities\": [\n    {\n      \"name\": \"Harshit\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"Ravi\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"DocuMind\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"TechNova\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"DataForge\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Karan\",\n      \"type\": \"Person\"\n    },\n    {\n      \"name\": \"PulseAnalytics\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"Neo4j\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"FastAPI\",\n      \"type\": \"Technology\"\n    },\n    {\n      \"name\": \"React\",\n      \"type\": \"Technology\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"source\": \"Harshit\",\n      \"type\": \"COLLABORATES_WITH\",\n      \"target\": \"Ravi\",\n      \"evidence\": \"Harshit collaborates with Ravi from DataForge on dataset quality tooling.\"\n    },\n    {\n      \"source\": \"Karan\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"DocuMind\",\n      \"evidence\": \"Karan works on DocuMind as a Backend Engineer.\",\n      \"properties\": {\n        \"role\": \"Backend Engineer\"\n      }\n    },\n    {\n      \"source\": \"DocuMind\",\n      \"type\": \"USES\",\n      \"target\": \"Neo4j\",\n      \"evidence\": \"DocuMind uses Neo4j to store extracted knowledge and FastAPI to serve its API.\"\n    },\n    {\n      \"source\": \"DocuMind\",\n      \"type\": \"USES\",\n      \"target\": \"FastAPI\",\n      \"evidence\": \"DocuMind uses Neo4j to store extracted knowledge and FastAPI to serve its API.\"\n    },\n    {\n      \"source\": \"DataForge\",\n      \"type\": \"FOUNDED\",\n      \"target\": \"Ravi\",\n      \"evidence\": \"DataForge was founded by Ravi in 2019.\",\n      \"properties\": {\n        \"since\": 2019\n      }\n    },\n    {\n      \"source\": \"Ravi\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"DataForge\",\n      \"evidence\": \"DataForge was founded by Ravi in 2019.\",\n      \"properties\": {\n        \"role\": \"CTO\"\n      }\n    },\n    {\n      \"source\": \"Ravi\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"PulseAnalytics\",\n      \"evidence\": \"Meera works at DataForge as a Frontend Engineer and works on PulseAnalytics, a DataForge project that uses React.\",\n      \"properties\": {\n        \"role\": \"Frontend Engineer\"\n      }\n    },\n    {\n      \"source\": \"PulseAnalytics\",\n      \"type\": \"USES\",\n      \"target\": \"React\",\n      \"evidence\": \"Meera works at DataForge as a Frontend Engineer and works on PulseAnalytics, a DataForge project that uses React.\"\n    }\n  ]\n}",
+      "entities": [
+        {
+          "name": "Harshit",
+          "type": "Person"
+        },
+        {
+          "name": "Ravi",
+          "type": "Person"
+        },
+        {
+          "name": "DocuMind",
+          "type": "Project"
+        },
+        {
+          "name": "TechNova",
+          "type": "Company"
+        },
+        {
+          "name": "DataForge",
+          "type": "Company"
+        },
+        {
+          "name": "Karan",
+          "type": "Person"
+        },
+        {
+          "name": "PulseAnalytics",
+          "type": "Project"
+        },
+        {
+          "name": "Neo4j",
+          "type": "Technology"
+        },
+        {
+          "name": "FastAPI",
+          "type": "Technology"
+        },
+        {
+          "name": "React",
+          "type": "Technology"
+        }
+      ],
+      "relationships": [
+        {
+          "source": "Harshit",
+          "source_type": "Person",
+          "type": "COLLABORATES_WITH",
+          "target": "Ravi",
+          "target_type": "Person",
+          "properties": {},
+          "evidence": "Harshit collaborates with Ravi from DataForge on dataset quality tooling.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "Karan",
+          "source_type": "Person",
+          "type": "WORKS_ON",
+          "target": "DocuMind",
+          "target_type": "Project",
+          "properties": {
+            "role": "Backend Engineer"
+          },
+          "evidence": "Karan works on DocuMind as a Backend Engineer.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "DocuMind",
+          "source_type": "Project",
+          "type": "USES",
+          "target": "Neo4j",
+          "target_type": "Technology",
+          "properties": {},
+          "evidence": "DocuMind uses Neo4j to store extracted knowledge and FastAPI to serve its API.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "DocuMind",
+          "source_type": "Project",
+          "type": "USES",
+          "target": "FastAPI",
+          "target_type": "Technology",
+          "properties": {},
+          "evidence": "DocuMind uses Neo4j to store extracted knowledge and FastAPI to serve its API.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "Ravi",
+          "source_type": "Person",
+          "type": "WORKS_AT",
+          "target": "DataForge",
+          "target_type": "Company",
+          "properties": {
+            "role": "CTO"
+          },
+          "evidence": "DataForge was founded by Ravi in 2019.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "Ravi",
+          "source_type": "Person",
+          "type": "WORKS_ON",
+          "target": "PulseAnalytics",
+          "target_type": "Project",
+          "properties": {
+            "role": "Frontend Engineer"
+          },
+          "evidence": "Meera works at DataForge as a Frontend Engineer and works on PulseAnalytics, a DataForge project that uses React.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        },
+        {
+          "source": "PulseAnalytics",
+          "source_type": "Project",
+          "type": "USES",
+          "target": "React",
+          "target_type": "Technology",
+          "properties": {},
+          "evidence": "Meera works at DataForge as a Frontend Engineer and works on PulseAnalytics, a DataForge project that uses React.",
+          "chunk_id": "chunk-132e1b1c4b87454f"
+        }
+      ],
+      "rejected": [
+        {
+          "item": {
+            "source": "DataForge",
+            "type": "FOUNDED",
+            "target": "Ravi",
+            "properties": {
+              "role": null,
+              "since": 2019
+            },
+            "evidence": "DataForge was founded by Ravi in 2019."
+          },
+          "reason": "ontology: Company-[:FOUNDED]->Person is not allowed by the ontology"
+        }
+      ]
+    },
+    {
+      "chunk_id": "chunk-8d112b4896ad0684",
+      "chunk_index": 2,
+      "page": 1,
+      "status": "ok",
+      "attempts": 1,
+      "tokens": [
+        411,
+        286
+      ],
+      "raw": "{\n  \"entities\": [\n    {\n      \"name\": \"DataForge\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"PulseAnalytics\",\n      \"type\": \"Project\"\n    },\n    {\n      \"name\": \"Tech Nova\",\n      \"type\": \"Company\"\n    },\n    {\n      \"name\": \"Vision Team\",\n      \"type\": \"Team\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"source\": \"DataForge\",\n      \"type\": \"WORKS_AT\",\n      \"target\": \"Frontend Engineer\",\n      \"evidence\": \"DataForge as a Frontend Engineer\",\n      \"properties\": {\n        \"role\": \"Frontend Engineer\",\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"DataForge\",\n      \"type\": \"WORKS_ON\",\n      \"target\": \"PulseAnalytics\",\n      \"evidence\": \"works on PulseAnalytics, a DataForge project\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    },\n    {\n      \"source\": \"Tech Nova\",\n      \"type\": \"OWNS\",\n      \"target\": \"Vision Team\",\n      \"evidence\": \"Tech Nova will expand its Vision Team\",\n      \"properties\": {\n        \"role\": null,\n        \"since\": null\n      }\n    }\n  ]\n}",
+      "entities": [
+        {
+          "name": "DataForge",
+          "type": "Company"
+        },
+        {
+          "name": "PulseAnalytics",
+          "type": "Project"
+        },
+        {
+          "name": "Tech Nova",
+          "type": "Company"
+        },
+        {
+          "name": "Vision Team",
+          "type": "Team"
+        }
+      ],
+      "relationships": [],
+      "rejected": [
+        {
+          "item": {
+            "source": "DataForge",
+            "type": "WORKS_AT",
+            "target": "Frontend Engineer",
+            "properties": {
+              "role": "Frontend Engineer",
+              "since": null
+            },
+            "evidence": "DataForge as a Frontend Engineer"
+          },
+          "reason": "endpoint 'Frontend Engineer' is not an accepted entity"
+        },
+        {
+          "item": {
+            "source": "DataForge",
+            "type": "WORKS_ON",
+            "target": "PulseAnalytics",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "works on PulseAnalytics, a DataForge project"
+          },
+          "reason": "ontology: Company-[:WORKS_ON]->Project is not allowed by the ontology"
+        },
+        {
+          "item": {
+            "source": "Tech Nova",
+            "type": "OWNS",
+            "target": "Vision Team",
+            "properties": {
+              "role": null,
+              "since": null
+            },
+            "evidence": "Tech Nova will expand its Vision Team"
+          },
+          "reason": "ontology: Company-[:OWNS]->Team is not allowed by the ontology"
+        }
+      ]
+    }
+  ]
+}

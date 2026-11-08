@@ -1,0 +1,3 @@
+Partnership Announcement
+
+Meera works on Atlas, a mapping project owned by DataForge. Atlas uses Rust and Neo4j. Asha from Orbitly collaborates with Meera on the Atlas data model.

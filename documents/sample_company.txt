@@ -1,0 +1,11 @@
+TechNova Annual Engineering Overview
+
+TechNova is an applied AI company headquartered in Bengaluru. Harshit works at TechNova as an ML Engineer and is a member of the Vision Team. Priya also works at TechNova as a Data Scientist, and she works on VisionAI together with Harshit.
+
+VisionAI is a computer vision platform owned by TechNova. The VisionAI project uses Python and PyTorch for model training. Harshit collaborates with Ravi from DataForge on dataset quality tooling.
+
+DocuMind is TechNova's document intelligence project. Karan works on DocuMind as a Backend Engineer. DocuMind uses Neo4j to store extracted knowledge and FastAPI to serve its API.
+
+DataForge was founded by Ravi in 2019. Ravi is the CTO of DataForge. Meera works at DataForge as a Frontend Engineer and works on PulseAnalytics, a DataForge project that uses React.
+
+Advanced test case (use later, in M4/M5): The company also announced that "Tech Nova" will expand its Vision Team. He said the project would launch next year.

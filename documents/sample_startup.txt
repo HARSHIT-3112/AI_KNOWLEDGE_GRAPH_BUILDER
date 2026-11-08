@@ -1,0 +1,5 @@
+Orbitly Product Update
+
+Orbitly is a logistics software company. Asha works at Orbitly as a Product Manager and works on RouteWise, a route-planning project owned by Orbitly. RouteWise uses Python and PostgreSQL.
+
+Vikram works at Orbitly as a Data Engineer and is a member of the Platform Team. Vikram collaborates with Priya from TechNova on a shared mapping dataset.
