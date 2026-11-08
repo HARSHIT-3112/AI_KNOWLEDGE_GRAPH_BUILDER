@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge Graph Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Pinned versions (M10 rule). three + three-spritetext draw the floating 3D labels. -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three-spritetext@1.9.3/dist/three-spritetext.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/force-graph@1.47.4/dist/force-graph.min.js"></script>
+</head>
+<body>
+  <div id="graph"></div>
+
+  <!-- top bar -->
+  <header id="topbar">
+    <div class="brand">
+      <span class="logo">◈</span>
+      <div>
+        <h1>Knowledge Graph Explorer</h1>
+        <p id="stats">loading…</p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="View mode">
+        <button id="mode3d" class="active">3D</button>
+        <button id="mode2d">2D</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="showDocs"> documents</label>
+      <label class="toggle"><input type="checkbox" id="showManual" checked> unsourced facts</label>
+      <input id="search" type="search" placeholder="Find entity…" autocomplete="off">
+      <button id="resetView" title="Clear highlight and fit graph">Reset</button>
+    </div>
+  </header>
+
+  <!-- legend -->
+  <div id="legend"></div>
+
+  <!-- side panel -->
+  <aside id="panel">
+    <nav class="tabs">
+      <button data-tab="details" class="active">Details</button>
+      <button data-tab="ask">Ask</button>
+      <button data-tab="upload">Upload</button>
+      <button data-tab="review">Review <span id="reviewCount" class="badge"></span></button>
+    </nav>
+
+    <section id="tab-details" class="tab active">
+      <div id="details">
+        <p class="hint">Click a node to see its facts and the exact quotes they came from.
+          Click a link to see one fact. Drag to rotate, scroll to zoom.</p>
+      </div>
+    </section>
+
+    <section id="tab-ask" class="tab">
+      <form id="askForm">
+        <textarea id="question" rows="3" maxlength="500"
+          placeholder="e.g. Which project does Harshit work on, and who else works on it?"></textarea>
+        <button type="submit" id="askBtn">Ask</button>
+      </form>
+      <div id="answer"></div>
+    </section>
+
+    <section id="tab-upload" class="tab">
+      <label id="dropzone">
+        <input type="file" id="fileInput" accept=".pdf,.txt,.md" hidden>
+        <strong>Drop a PDF / TXT / MD here</strong><span>or click to choose</span>
+      </label>
+      <div id="jobs"></div>
+      <h3>Documents</h3>
+      <div id="docList"></div>
+    </section>
+
+    <section id="tab-review" class="tab">
+      <p class="hint">Facts the validator wasn't sure about. They are <em>not</em> in the graph until a person approves them.</p>
+      <div id="reviewList"></div>
+    </section>
+  </aside>
+
+  <!-- API key prompt -->
+  <div id="keyModal" hidden>
+    <form id="keyForm">
+      <h2>Connect</h2>
+      <p>Paste the <code>API_KEY</code> from your <code>.env</code>. It's kept only for this browser tab.</p>
+      <input type="password" id="apiKey" placeholder="API key" autocomplete="off" required>
+      <p id="keyError" class="error"></p>
+      <button type="submit">Connect</button>
+    </form>
+  </div>
+
+  <div id="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -63,6 +63,7 @@ class Citation:
     document: str
     page: int
     text: str
+    entity_ids: list[str] = field(default_factory=list)   # graph facts: their two endpoints
 
 
 @dataclass
@@ -91,7 +92,7 @@ def build_context(passages: list[dict], facts: list[GraphFact], max_chars: int =
         parts.append(block)
         used += len(block)
         lookup[f"F{i}"] = Citation(f"F{i}", "graph fact", ev["document"], ev["page"],
-                                   f"{f.sentence()} — \"{ev['quote']}\"")
+                                   f"{f.sentence()} — \"{ev['quote']}\"", [f.source_id, f.target_id])
     for i, p in enumerate(passages, 1):
         block = f"[S{i}] ({p['document']}, p{p['page']})\n{p['text']}"
         if used + len(block) > max_chars:

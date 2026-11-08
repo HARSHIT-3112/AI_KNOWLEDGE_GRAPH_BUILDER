@@ -20,9 +20,12 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import Depends, FastAPI, File, HTTPException, Query, Request, Response, UploadFile, status
+from fastapi.responses import RedirectResponse
 from fastapi.security import APIKeyHeader
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from app.api.graph_view import build_graph
 from app.api.ratelimit import TokenBucket, limit
 from app.core.config import get_settings
 from app.core.logging import setup_logging, trace_id_var
@@ -229,6 +232,9 @@ def ask(request: Request, body: AskRequest):
                        "text": c.text[:300]} for c in r.citations],
         "warnings": {"invalid_citations": r.invalid_citations, "unsupported_terms": r.unsupported_terms},
         "linked_entities": [e.name for e in r.linked_entities],
+        # for the UI: light up the entities this answer is based on
+        "highlight_entity_ids": list(dict.fromkeys(
+            [e.id for e in r.linked_entities] + [i for c in r.citations for i in c.entity_ids if i])),
         "top_vector_score": round(r.top_vector_score, 3),
     }
 
@@ -282,3 +288,19 @@ def metrics(request: Request):
             "graph": {"entities": r["entities"], "facts_with_evidence": r["facts"],
                       "chunks": r["chunks"], "chunks_embedded": r["embedded"]},
             "oldest_processing_since": oldest.iso_format() if oldest else None}
+
+
+# ------------------------------------------------------------ web UI (frontend)
+@app.get("/graph", dependencies=[Auth, ReadLimit])
+def graph(request: Request, include_documents: bool = False):
+    """The knowledge graph as {nodes, links} for the 3D view."""
+    return build_graph(request.app.state.driver, db(), include_documents)
+
+
+WEB_DIR = Path(__file__).resolve().parent.parent / "web"
+app.mount("/ui", StaticFiles(directory=WEB_DIR, html=True), name="ui")
+
+
+@app.get("/", include_in_schema=False)
+def home():
+    return RedirectResponse("/ui/")

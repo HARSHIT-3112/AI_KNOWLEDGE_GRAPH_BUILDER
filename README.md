@@ -4,7 +4,7 @@ Turn documents into a **traceable knowledge graph** and ask questions that are a
 
 Upload a PDF or text file. A local LLM extracts people, companies, projects and technologies. Code validates every proposed fact against the source text. The facts that pass are stored in Neo4j together with the exact quote, chunk and page they came from. Questions are answered by combining graph traversal with vector and keyword search (GraphRAG).
 
-Everything runs locally: **Neo4j + Ollama + Python**, with no paid API keys.
+Everything runs locally: **Neo4j + Ollama + Python**, with no paid API keys. A built-in **3D graph explorer** lets you fly through the knowledge graph, click any fact to see the quote behind it, and watch the entities behind an answer light up.
 
 > **Design principle:** the LLM *proposes* facts → application code *validates* them → Neo4j *stores* them.
 > Model-generated Cypher is never executed.
@@ -50,6 +50,25 @@ flowchart LR
 (:Entity)-[:WORKS_AT {role, evidence[], sourceChunkIds[], sourceDocIds[], model, promptVersion}]->(:Entity)
 (:ReviewItem {status, reason, payload})-[:FROM_CHUNK]->(:Chunk)
 ```
+
+---
+
+## Graph explorer
+
+Open <http://localhost:8000> (served by the same FastAPI app — no separate frontend build).
+
+| Feature | What you see |
+|---|---|
+| **3D / 2D graph** | Entities as glowing nodes coloured by type, sized by connections, with labels and direction arrows. Rotate, zoom and fly around; switch to 2D for exact reading |
+| **Click a node** | Its facts, each with the exact quote, document and page — plus hand-entered facts marked as unsourced |
+| **Click a link** | One fact and its evidence |
+| **Ask** | A cited answer, and the entities behind it light up in the graph with particles along their links |
+| **Upload** | Drag in a file, watch it move through the pipeline stages live, see the new nodes appear |
+| **Review** | The facts the validator sent to human review, with the reason and quote |
+| **Toggles** | Show documents as nodes, hide unsourced facts, find an entity by name or alias |
+
+Built with [3d-force-graph](https://github.com/vasturiano/3d-force-graph) / force-graph (pinned CDN versions) and plain
+JavaScript. Document text is untrusted, so the page never inserts it as HTML (`textContent` only; hover labels are escaped).
 
 ---
 
@@ -99,6 +118,7 @@ docker compose up -d --build    # Neo4j + API + worker, with health checks
 docker compose ps               # wait until all three are (healthy)
 ```
 
+- **Graph explorer: <http://localhost:8000>**. Paste your `API_KEY` once.
 - API docs: <http://localhost:8000/docs>. Click **Authorize** and paste your `API_KEY`.
 - Neo4j Browser: <http://localhost:7475>. Connect URL `bolt://localhost:7688`, user `neo4j`.
 
@@ -127,6 +147,7 @@ curl -H "X-API-Key: $KEY" -H "Content-Type: application/json" \
 | `GET /search?q=&mode=hybrid\|vector\|keyword` | Retrieve passages |
 | `GET /entities/{id}` | An entity's facts with supporting quotes |
 | `GET /review` | Facts waiting for human review |
+| `GET /graph?include_documents=` | The graph as nodes + links for the explorer |
 | `GET /metrics` · `/health/live` · `/health/ready` | Operations |
 
 ### Local development (without the API containers)
@@ -158,7 +179,8 @@ app/
   graph/        ontology allow-lists, deterministic ids, repository, entity resolver, graph writer
   retrieval/    embeddings, vector/keyword/hybrid search, entity linking + traversal, cited answerer
   pipeline/     Neo4j-backed job queue (atomic claim, retry/backoff, stale recovery), worker
-  api/          FastAPI app, API-key auth, rate limiting, metrics
+  api/          FastAPI app, API-key auth, rate limiting, metrics, /graph for the explorer
+  web/          the 3D graph explorer (HTML/CSS/JS, served at /)
 scripts/        one script per milestone, worker, backup with restore test, quality gate
 tests/          unit, Neo4j integration, LLM contract (faked model), API/worker, hardening
 lessons/        Cypher exercises to run in Neo4j Browser
@@ -188,7 +210,7 @@ eval/           labelled retrieval questions
 bash scripts/check.sh
 ```
 
-This runs 73 tests: unit tests, Neo4j integration (idempotency, rollback, constraints, provenance, deletion), LLM contract tests with a faked model, API and worker tests (auth, upload limits, duplicate uploads, retries, permanent failures, atomic claims), and hardening tests. It then runs a retrieval regression gate (hybrid Recall@5 ≥ 0.93, MRR ≥ 0.80).
+This runs 78 tests: unit tests, Neo4j integration (idempotency, rollback, constraints, provenance, deletion), LLM contract tests with a faked model, API and worker tests (auth, upload limits, duplicate uploads, retries, permanent failures, atomic claims), and hardening tests. It then runs a retrieval regression gate (hybrid Recall@5 ≥ 0.93, MRR ≥ 0.80).
 
 Integration tests namespace their data and clean up after themselves, and they use a private job queue, so they're safe to run against a live system.
 

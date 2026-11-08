@@ -410,5 +410,23 @@ recoverable errors; protected secrets; automated tests across parsing, validatio
 5. Re-upload the same file → `duplicate: true`, no new nodes.
 6. `GET /review` → the doubtful facts waiting for a human.
 
+## Bonus — 3D graph explorer (`app/web/`)
+
+Open <http://localhost:8000>. One HTML page + one JS file, served by FastAPI, using `3d-force-graph`.
+- `GET /graph` (`app/api/graph_view.py`) returns entities + ontology relationships (never MENTIONS/HAS_CHUNK
+  unless you ask for documents) with a `sourced` flag; `/ask` now also returns `highlight_entity_ids`.
+- **Security:** names, quotes and answers are untrusted (they came from documents and the LLM) → inserted with
+  `textContent`, and the library's HTML hover labels go through `escapeHtml()`. Otherwise a document containing
+  `<img onerror=…>` would run code in your browser.
+
+Bugs found by actually looking at it in a browser:
+- **White spheres** — the 3D labels need a global three.js (r149); the graph library then used it with lights
+  tuned for newer three.js (π-scaled intensity) → every colour blown out to white. Fixed by setting light levels.
+- **Camera inside the graph** — "zoom to fit" ran while the layout was still expanding. Now it fits when the
+  simulation stops, from the nodes' real extent, with a minimum distance.
+- **Squashed layout in a background tab** — browsers throttle animation in hidden tabs, so a time-based
+  cooldown stopped the layout after a few steps. Now: `warmupTicks` + a step-based cooldown.
+- Default forces packed 12 nodes so tightly the labels overlapped → stronger charge / longer links.
+
 **Where to go next:** human-review UI (approve → write fact), a gold dataset + precision/recall for extraction
 (guide §12.2), LangGraph for the review workflow (guide §11), OCR, multi-user permissions, n8n trigger (guide §10.7).

@@ -37,6 +37,8 @@ class GraphFact:
     properties: dict
     hops: int
     evidence: list[dict] = field(default_factory=list)   # [{quote, chunk_id, document, page}]
+    source_id: str = ""                                  # entity ids, so a UI can highlight them
+    target_id: str = ""
 
     def sentence(self) -> str:
         props = ", ".join(f"{k}: {v}" for k, v in self.properties.items())
@@ -77,6 +79,7 @@ def neighbourhood_facts(driver, database: str, entity_ids: list[str], max_hops: 
         MATCH (d:Document)-[:HAS_CHUNK]->(c:Chunk {{id: r.sourceChunkIds[j]}})
         WITH r, hops, collect({{quote: r.evidence[j], chunk_id: c.id, document: d.filename, page: c.page}}) AS ev
         RETURN startNode(r).name AS source, type(r) AS rel, endNode(r).name AS target,
+               startNode(r).id AS source_id, endNode(r).id AS target_id,
                {{role: r.role, since: r.since}} AS props, hops, ev
         ORDER BY hops, source, rel
         """,
@@ -84,6 +87,6 @@ def neighbourhood_facts(driver, database: str, entity_ids: list[str], max_hops: 
     )
     return [
         GraphFact(r["source"], r["rel"], r["target"], {k: v for k, v in r["props"].items() if v is not None},
-                  r["hops"], r["ev"])
+                  r["hops"], r["ev"], r["source_id"], r["target_id"])
         for r in records
     ]
